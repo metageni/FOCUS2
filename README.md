@@ -66,7 +66,6 @@ Options:
 	-b float
 		% of sequences to resample (default: 80.0)
 		
-
 	example> python focus2.py -q input/ -dir output/
 	 
 (2) OUTPUT
@@ -77,22 +76,30 @@ Program
 FOCUS2(R)
 
 Options:
-         -h          ------: print help
-         -q          string: folder with multiple FASTA/FASTQ files
-         -b          file: binning file for '-q' from FOCUS2
-         -dir        string: output directory
-         -mi         float:  minimum identity (default 60 %)
-         -ml         int:    minimum alignment (default 45 nucleotides)
-         -e          float:  e-value (default 0.00001)
-         -t          int:    number of threads (default 1)
-         -o          string: project name (default 'my_project')
-------------------------------------------------------------------------------
+	-h none
+		print help
+	-q string:
+		folder with multiple FASTA/FASTQ files
+	-b file:
+		binning file for '-q' from FOCUS2
+	-dir string:
+		output directory
+	-mi float:
+		minimum identity (default 60 %)
+	-ml int:
+		minimum alignment (default 45 nucleotides)
+	-e float:
+		e-value (default 0.00001)
+	-t int:
+		number of threads (default 1)
+	-o string:
+		project name (default 'my_project')
 
 (2) OUTPUT
 FOCUS2R output will be add the folder selected in -dir
 
 (3) OBSERVATION
-     3.1. FOCUS2(R) only uses hs-blastn as aligner
+- FOCUS2(R) only uses hs-blastn as aligner
 
 DEPENDENCIES
 ------------
