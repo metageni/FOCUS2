@@ -1,7 +1,7 @@
 #FOCUS2: agile and sensitive classification of metagenomics data using a reduced database | version 0.1 (2015)
 #---------------------------------------------------------------------------------------------------------------------------------------
-#(c)            Silva, G. G. Z.,B. E. Dutilh, and R. A. Edwards: 
-#		FOCUS2: agile and sensitive classification of metagenomics data using a reduced database (not submitted)
+#(c)    Genivaldo Gueiros Z. Silva, Daniel A. Cuevas, John Matthew Haggerty, Michael Doane, Elizabeth A Dinsdale, Bas E. Dutilh, and Robert A. Edwards
+#		Ecological Implications of Metagenomics Data Analysis (not submitted)
 #website: 	https://edwards.sdsu.edu/FOCUS2
 #---------------------------------------------------------------------------------------------------------------------------------------
 
