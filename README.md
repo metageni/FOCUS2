@@ -78,22 +78,32 @@ FOCUS2(R)
 Options:
 	-h none
 		print help
+		
 	-q string
 		folder with multiple FASTA/FASTQ files
+		
 	-b file
 		binning file for '-q' from FOCUS2
+		
 	-dir string
 		output directory
+		
 	-mi float
 		minimum identity (default 60 %)
+		
 	-ml int
 		minimum alignment (default 45 nucleotides)
+		
 	-e float
 		e-value (default 0.00001)
+		
 	-t int
 		number of threads (default 1)
+		
 	-o string
 		project name (default 'my_project')
+	
+	example> python focus2r.py -q FASTA/FASTQ -b focus2_binning -dir output/
 
 (2) OUTPUT
 FOCUS2R output will be add the folder selected in -dir
