@@ -73,7 +73,7 @@ FOCUS2 output will be add the folder selected in -dir
 
 Program
 --------
-FOCUS2(R)
+(1) FOCUS2(R)
 
 Options:
 	-h none
