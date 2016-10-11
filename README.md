@@ -13,15 +13,13 @@ focus2__downloadDB.py.py: Downloads the FOCUS2 database
 (1) USAGE
 python focus2__downloadDB.py
 
-#############################################################################################################
-Program: focus2.py: FOCUS2 main program
-#############################################################################################################
->>>>>>>>>>>>>>>>>>>>>>>> FOCUS2
+Program
+--------
+focus2.py: FOCUS2 main program
+
 (1) USAGE
 -----
 
-FOCUS2: agile and sensitive classification of metagenomics data using a reduced database
---------------------------------------------------------------------------------------------------------------------
 Options:
          -h          ------: print help
          -q          string: folder with multiple FASTA/FASTQ files
