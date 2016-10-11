@@ -1,7 +1,8 @@
 #FOCUS2
 Agile and sensitive classification of metagenomics data using a reduced database || version 0.1
 
-(c)     Genivaldo G. Z. Silva, Daniel A. Cuevas, J. Matthew Haggerty, Michael Doane, Elizabeth A. Dinsdale, Bas E. Dutilh, and Robert A. Edwards 
+(c)     Genivaldo G. Z. Silva, Daniel A. Cuevas, J. Matthew Haggerty, Michael Doane, Elizabeth A. Dinsdale, Bas E. Dutilh, and Robert A. Edwards
+
 		Ecological Implications of Metagenomics Data Analysis (unplublished).
 		
 website: 	https://edwards.sdsu.edu/FOCUS2
