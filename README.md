@@ -21,6 +21,7 @@ focus2.py: FOCUS2 main program
 -----
 
 Options:
+
 	-h  none
 		print help
 		
@@ -76,6 +77,7 @@ Program
 (1) FOCUS2(R)
 
 Options:
+
 	-h none
 		print help
 		
