@@ -78,21 +78,21 @@ FOCUS2(R)
 Options:
 	-h none
 		print help
-	-q string:
+	-q string
 		folder with multiple FASTA/FASTQ files
-	-b file:
+	-b file
 		binning file for '-q' from FOCUS2
-	-dir string:
+	-dir string
 		output directory
-	-mi float:
+	-mi float
 		minimum identity (default 60 %)
-	-ml int:
+	-ml int
 		minimum alignment (default 45 nucleotides)
-	-e float:
+	-e float
 		e-value (default 0.00001)
-	-t int:
+	-t int
 		number of threads (default 1)
-	-o string:
+	-o string
 		project name (default 'my_project')
 
 (2) OUTPUT
