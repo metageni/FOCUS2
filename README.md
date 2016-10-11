@@ -23,34 +23,49 @@ focus2.py: FOCUS2 main program
 Options:
 	-h  none
 		print help
+		
 	-q string
 		folder with multiple FASTA/FASTQ files
+		
 	-dir string
 		output directory
+		
 	-o string
 		project name (default 'my_project')
+		
 	-mi float
 		minimum identity (default 60 %)
+		
 	-ml int
 		minimum alignment (default 45 nucleotides)
+		
 	-k int
 		k-mer frequency used on FOCUS (default: 7) (6/7)
+		
 	-n int
 		normalize counts minimum alignment (0:False/1:True)(default: 0)
+		
 	-t int
 		number of threads (default 1)
+		
 	-e float
 		e-value (default 0.00001)
+		
 	-a string
 		aligner (blastn/hsblastn) (default: hsblastn)
+		
 	-s int
 		split profiling in different levels (0:False/1:True)(default: 1)
+		
 	-bootstrap int
 		resamples the data to have more confidence in the results (0:False/1:True)(default: 0)
+		
 	-ns int
 		number of resampling per sample (default: 10)
+		
 	-b float
 		% of sequences to resample (default: 80.0)
+		
 
 	example> python focus2.py -q input/ -dir output/
 	 
