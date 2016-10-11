@@ -21,7 +21,7 @@ focus2.py: FOCUS2 main program
 -----
 
 Options:
-	-h ------:
+	-h  none:
 		print help
 	-q string:
 		folder with multiple FASTA/FASTQ files
