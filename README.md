@@ -8,7 +8,7 @@ website: 	https://edwards.sdsu.edu/FOCUS2
 
 Program
 --------
-focus2__downloadDB.py.py: Downloads the FOCUS2 database
+focus2__downloadDB.py: Downloads the FOCUS2 database
 
 (1) USAGE
 python focus2__downloadDB.py
