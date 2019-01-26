@@ -11,10 +11,9 @@ def which(program_name):
         program_name (str): Program name.
 
     Returns:
-        None or str: Program path.
+        str or None: Program path if found.
 
     """
-
     def is_exe(fpath):
         return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
@@ -70,7 +69,7 @@ def bwa_alignment(reference, input_reads, output, number_threads="1"):
 
     # not accepted
     else:
-        raise Exception('Please input either one or a pair of files')
+        raise Exception('Please input either one or a pair of files.')
 
 
 def bwa_index_db(reference_fasta):
@@ -121,7 +120,7 @@ def uncompress(input_file):
         os.system('unzip {}'.format(input_file))
 
     else:
-        raise Exception('Please install unzip')
+        raise Exception('Please install unzip.')
 
 
 def donwload(url):

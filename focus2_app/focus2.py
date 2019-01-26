@@ -100,9 +100,9 @@ def main():
             LOGGER.info('   {}.3) Generating FASTQ with unmapped reads: {}'.format(counter, alignment_output))
             unmapped_alignment_output = "{}/unmapped_out_{}.sam".format(output_directory, target_file)
             unmapped_reads_output = "{}/unmapped_out_{}.fastq".format(output_directory, target_file)
-
             samtools_view(alignment_output, "-f 4", unmapped_alignment_output)
             samtools_bam2fq(unmapped_alignment_output, unmapped_reads_output)
+
             # get abundance counts
             LOGGER.info('   {}.4) Counting abundance in output file: {}'.format(counter, clean_alignment_output))
             abundance_counts[target_file] = parse_alignments(clean_alignment_output)
