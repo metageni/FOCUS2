@@ -81,23 +81,27 @@ def bwa_index_db(reference_fasta):
     os.system('bwa index {}'.format(reference_fasta))
 
 
-def samtools_view(alignment_file):
-    """Run samtools view and clean up BAM/SAM.
-
-    Details:
-
-    Remove alignments:
-        - Read unmapped.
-        - Not primary alignment.
-        - Read fails platform/vendor quality checks.
-        - Read is PCR or optical duplicate.
-        - Supplementary alignment.
+def samtools_view(alignment_file, parameter_flag_target, output_name):
+    """Run samtools view.
 
     Args:
         alignment_file (str): Path to BAM/SAM
+        flag_target (str): Parameter and flag target e.g -F 3844 (best hits) or -f 4 (unmapped flag)
+        output_name (str): Path to output FASTQ file
+
+    """
+    os.system('samtools view -h {} {} > {}'.format(parameter_flag_target, alignment_file, output_name))
+
+
+def samtools_bam2fq(alignment_file, output_name):
+    """Run samtools bam2fq to get FASTQ from BAM/SAM.
+
+    Args:
+        alignment_file (str): Path to BAM/SAM
+        output_name (str): Path to output FASTQ file
         .
     """
-    os.system('samtools view -h -F 3844 {} > clean_{}'.format(alignment_file, alignment_file))
+    os.system('samtools bam2fq {} > {}_{}'.format(alignment_file, output_name))
 
 
 def uncompress(input_file):

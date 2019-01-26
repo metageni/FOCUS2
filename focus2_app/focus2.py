@@ -2,23 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import csv
 import logging
 import os
-import random
 
 from pathlib import Path
 from collections import defaultdict
 
 from focus2_app import version
-
+from wrappers import is_wanted_file, which, bwa_alignment, samtools_view
+from do_alignment import parse_alignments
 
 LOGGER_FORMAT = '[%(asctime)s - %(levelname)s] %(message)s'
 logging.basicConfig(format=LOGGER_FORMAT, level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
-
-
-
 
 
 def parse_args():
@@ -48,6 +44,7 @@ def main():
     query = Path(args.query)
     prefix = args.output_prefix
     output_directory = Path(args.output_directory)
+    reference = "db/SPN032672.fasta"
     WORK_DIRECTORY = Path(args.alternate_directory) if args.alternate_directory else Path(__file__).parents[0]
     threads = args.threads
     aligner_path = which("bwa")
@@ -75,9 +72,36 @@ def main():
     elif WORK_DIRECTORY != WORK_DIRECTORY or not WORK_DIRECTORY.exists():
         LOGGER.critical("WORK_DIRECTORY: {} does not exist".format(WORK_DIRECTORY))
 
-
     else:
-        LOGGER.info("1) RUNNING FOCUS2")
+        LOGGER.info("Running FOCUS2")
+
+        abundance_counts = defaultdict(dict)
+
+        for counter, target_file in enumerate(os.listdir(query)):
+            counter += 1
+
+            LOGGER.info("{}) Working on: {}".format(counter, target_file))
+
+            LOGGER.info('   {}.1) Aligning reads in {}'.format(counter, target_file))
+
+            # input and output names
+            input_reads = ["{}/{}".format(query, target_file)]
+            alignment_output = "{}/out_{}.sam".format(output_directory, target_file)
+
+            # run alignment
+            bwa_alignment(reference, input_reads, alignment_output)
+
+            # get best hits
+            LOGGER.info('   {}.2) Parsing Best hits in file: {}'.format(counter, alignment_output))
+            clean_alignment_output = "{}/clean_out_{}.sam".format(output_directory, target_file)
+            samtools_view(alignment_output, "-F 3844", clean_alignment_output)
+
+            # get abundance counts
+            LOGGER.info('   {}.3) Counting abundance in output file: {}'.format(counter, clean_alignment_output))
+            abundance_counts[target_file] = parse_alignments(clean_alignment_output)
+
+    for i in abundance_counts:
+        print(i, abundance_counts[i])
 
     LOGGER.info('Done'.format(output_directory))
 
