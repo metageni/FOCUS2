@@ -9,7 +9,7 @@ from pathlib import Path
 from collections import defaultdict
 
 from focus2_app import version
-from wrappers import is_wanted_file, which, bwa_alignment, samtools_view
+from wrappers import is_wanted_file, which, bwa_alignment, samtools_view, samtools_bam2fq
 from do_alignment import parse_alignments
 
 LOGGER_FORMAT = '[%(asctime)s - %(levelname)s] %(message)s'
@@ -96,8 +96,15 @@ def main():
             clean_alignment_output = "{}/clean_out_{}.sam".format(output_directory, target_file)
             samtools_view(alignment_output, "-F 3844", clean_alignment_output)
 
+            # get unmapped alignment and create FASTQ
+            LOGGER.info('   {}.3) Generating FASTQ with unmapped reads: {}'.format(counter, alignment_output))
+            unmapped_alignment_output = "{}/unmapped_out_{}.sam".format(output_directory, target_file)
+            unmapped_reads_output = "{}/unmapped_out_{}.fastq".format(output_directory, target_file)
+
+            samtools_view(alignment_output, "-f 4", unmapped_alignment_output)
+            samtools_bam2fq(unmapped_alignment_output, unmapped_reads_output)
             # get abundance counts
-            LOGGER.info('   {}.3) Counting abundance in output file: {}'.format(counter, clean_alignment_output))
+            LOGGER.info('   {}.4) Counting abundance in output file: {}'.format(counter, clean_alignment_output))
             abundance_counts[target_file] = parse_alignments(clean_alignment_output)
 
     for i in abundance_counts:

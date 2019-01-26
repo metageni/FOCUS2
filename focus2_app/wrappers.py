@@ -101,7 +101,7 @@ def samtools_bam2fq(alignment_file, output_name):
         output_name (str): Path to output FASTQ file
         .
     """
-    os.system('samtools bam2fq {} > {}_{}'.format(alignment_file, output_name))
+    os.system('samtools bam2fq {} > {}'.format(alignment_file, output_name))
 
 
 def uncompress(input_file):
