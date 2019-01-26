@@ -6,6 +6,7 @@ from setuptools import setup
 requirements = [
     'numpy >= 1.12.1',
     'scipy >= 0.19.0',
+    'pysam'
 ]
 
 test_requirements = [

@@ -12,51 +12,13 @@ from collections import defaultdict
 
 from focus2_app import version
 
+
 LOGGER_FORMAT = '[%(asctime)s - %(levelname)s] %(message)s'
 logging.basicConfig(format=LOGGER_FORMAT, level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
 
 
-def which(program_name):
-    """python implementation of unix 'which' function.
 
-    Args:
-        program_name (str): Program name
-
-    Returns:
-        None or str: Program path
-
-    """
-
-    def is_exe(fpath):
-        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
-
-    fpath, fname = os.path.split(program_name)
-    if fpath:
-        if is_exe(program_name):
-            return program_name
-    else:
-        for path in os.environ["PATH"].split(os.pathsep):
-            path = path.strip('"')
-            exe_file = os.path.join(path, program_name)
-            if is_exe(exe_file):
-                return exe_file
-
-
-def is_wanted_file(queries):
-    """Remove files from query files that not have extension .fasta/.fastq/.fna
-
-    Args:
-        queries (list): List with query names
-
-    Returns:
-        list: sorted list with only .fasta/.fastq/.fna files
-
-    """
-    queries = [query for query in queries if query.split(".")[-1].lower() in ["fna", "fasta", "fastq"]]
-    queries.sort()
-
-    return queries
 
 
 def parse_args():
