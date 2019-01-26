@@ -46,13 +46,14 @@ def is_wanted_file(queries):
     return queries
 
 
-def bwa_alignment(reference, input_reads, output):
+def bwa_alignment(reference, input_reads, output, number_threads="1"):
     """Run bwa with either a single file or pair or files (FASTQs).
 
     Args:
         reference (str): Path to reference.
         input_reads (list): List with input reads path(s).
         output (str): Path to output file.
+        number_threads (str): Number of threads using during alignment.
 
     Raises:
         Exception: More than two files given as input file.
@@ -60,11 +61,12 @@ def bwa_alignment(reference, input_reads, output):
     """
     # Single file
     if len(input_reads) == 1:
-        os.system('bwa mem {} {} > {}'.format(reference, input_reads[0], output))
+        os.system('bwa mem -t {} {} {} > {}'.format(number_threads, reference, input_reads[0], output))
 
     # Pair files
     elif len(input_reads) == 2:
-        os.system('bwa mem {} {} {} > {}'.format(reference, input_reads[0], input_reads[1], output))
+        os.system('bwa mem -t {} {} {} {} > {}'.format(number_threads, reference, input_reads[0], input_reads[1],
+                                                       output))
 
     # not accepted
     else:

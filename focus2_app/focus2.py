@@ -49,7 +49,7 @@ def main():
     threads = args.threads
     aligner_path = which("bwa")
 
-    LOGGER.info("FOCUS2: Agile and sensitive classification of metagenomics data using a reduced database")
+    LOGGER.info("FOCUS2: Agile and sensitive classification of metagenomics data using a reduced database.")
 
     # check if output_directory is exists - if not, creates it
     if not output_directory.exists():
@@ -89,7 +89,7 @@ def main():
             alignment_output = "{}/out_{}.sam".format(output_directory, target_file)
 
             # run alignment
-            bwa_alignment(reference, input_reads, alignment_output)
+            bwa_alignment(reference, input_reads, alignment_output, threads)
 
             # get best hits
             LOGGER.info('   {}.2) Parsing Best hits in file: {}'.format(counter, alignment_output))
