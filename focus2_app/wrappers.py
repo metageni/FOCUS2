@@ -3,40 +3,17 @@
 
 import os
 
-
-def which(program_name):
-    """Python implementation of unix 'which' function.
-
-    Args:
-        program_name (str): Program name.
-
-    Returns:
-        str or None: Program path if found.
-
-    """
-    def is_exe(fpath):
-        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
-
-    fpath, fname = os.path.split(program_name)
-    if fpath:
-        if is_exe(program_name):
-            return program_name
-    else:
-        for path in os.environ["PATH"].split(os.pathsep):
-            path = path.strip('"')
-            exe_file = os.path.join(path, program_name)
-            if is_exe(exe_file):
-                return exe_file
+from shutil import which
 
 
 def is_wanted_file(queries):
     """Remove files from query files that not have extension FASTA/FASTA/FNA.
 
     Args:
-        queries (list): List with query names
+        queries (list): List with query names.
 
     Returns:
-        list: sorted list with only FASTA/FASTA/FNA files
+        list: Sorted list with only FASTA/FASTA/FNA files.
 
     """
     queries = [query for query in queries if query.split(".")[-1].lower() in ["fna", "fasta", "fastq"]]
@@ -73,7 +50,7 @@ def bwa_alignment(reference, input_reads, output, number_threads="1"):
 
 
 def bwa_index_db(reference_fasta):
-    """Index reference and output it into same folder as reference
+    """Index reference and output it into same folder as reference.
 
     Args:
         reference_fasta (str): Path to reference FASTA which will be formatted and outputted.
@@ -86,9 +63,9 @@ def samtools_view(alignment_file, parameter_flag_target, output_name):
     """Run samtools view.
 
     Args:
-        alignment_file (str): Path to BAM/SAM
-        flag_target (str): Parameter and flag target e.g -F 3844 (best hits) or -f 4 (unmapped flag)
-        output_name (str): Path to output FASTQ file
+        alignment_file (str): Path to BAM/SAM.
+        flag_target (str): Parameter and flag target e.g -F 3844 (best hits) or -f 4 (unmapped flag).
+        output_name (str): Path to output FASTQ file.
 
     """
     os.system('samtools view -h {} {} > {}'.format(parameter_flag_target, alignment_file, output_name))
@@ -98,8 +75,8 @@ def samtools_bam2fq(alignment_file, output_name):
     """Run samtools bam2fq to get FASTQ from BAM/SAM.
 
     Args:
-        alignment_file (str): Path to BAM/SAM
-        output_name (str): Path to output FASTQ file
+        alignment_file (str): Path to BAM/SAM.
+        output_name (str): Path to output FASTQ file.
         .
     """
     os.system('samtools bam2fq {} > {}'.format(alignment_file, output_name))
@@ -112,7 +89,7 @@ def uncompress(input_file):
         input_file (str): Input file to be uncompressed.
 
     Raises:
-        Exception: unzip not installed.
+        Exception: Unzip not installed.
 
     """
     # unzip is installed
@@ -130,7 +107,7 @@ def donwload(url):
         url (str): URL to be downloaded.
 
     Raises:
-        Exception: neither wget nor curl is installed.
+        Exception: Neither wget nor curl is installed.
 
     """
     # wget is installed

@@ -7,9 +7,10 @@ import os
 
 from pathlib import Path
 from collections import defaultdict
+from shutil import which
 
 from focus2_app import version
-from wrappers import is_wanted_file, which, bwa_alignment, samtools_view, samtools_bam2fq
+from wrappers import is_wanted_file, bwa_alignment, samtools_view, samtools_bam2fq
 from do_alignment import parse_alignments
 
 LOGGER_FORMAT = '[%(asctime)s - %(levelname)s] %(message)s'
@@ -21,7 +22,7 @@ def parse_args():
     """Parse args entered by the user.
 
     Returns:
-        argparse.Namespace: parsed arguments
+        argparse.Namespace: Parsed arguments
 
     """
     parser = argparse.ArgumentParser(
@@ -47,9 +48,12 @@ def main():
     reference = "db/SPN032672.fasta"
     WORK_DIRECTORY = Path(args.alternate_directory) if args.alternate_directory else Path(__file__).parents[0]
     threads = args.threads
-    aligner_path = which("bwa")
 
     LOGGER.info("FOCUS2: Agile and sensitive classification of metagenomics data using a reduced database.")
+
+    # check if bwa was installed
+    if not which("bwa"):
+        LOGGER.critical("Install BWA !!!")
 
     # check if output_directory is exists - if not, creates it
     if not output_directory.exists():
