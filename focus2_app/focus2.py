@@ -20,7 +20,7 @@ def parse_args():
     """Parse args entered by the user.
 
     Returns:
-        argparse.Namespace: Parsed arguments
+        argparse.Namespace: Parsed arguments.
 
     """
     parser = argparse.ArgumentParser(
@@ -33,7 +33,6 @@ def parse_args():
     parser.add_argument("-b", "--alternate_directory", help="Alternate directory for your databases", default="")
     parser.add_argument('-t', '--threads', help='Number Threads used during alignment (Default: 4)', default='4')
     parser.add_argument('-l', '--log', help='Path to log file (Default: STDOUT).', required=False)
-
 
     return parser.parse_args()
 
