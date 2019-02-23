@@ -1,142 +1,78 @@
-#FOCUS2
-Agile and sensitive classification of metagenomics data using a reduced database || version 0.1
+#### FOCUS2: Agile and sensitive classification of metagenomics data using a reduced database
+* [Installation](#installation)
+    * [dependencies](#dependencies)
+    * [pip3](#pip3)
+    * [bioconda](#bioconda)
+    * [git](#git)
+* [Usage](#usage)
+* [Output](#output)
+* [Citing](#citing)
 
-(c)     Genivaldo G. Z. Silva, Daniel A. Cuevas, J. Matthew Haggerty, Michael Doane, Elizabeth A. Dinsdale, Bas E. Dutilh, and Robert A. Edwards.
-		Ecological Implications of Metagenomics Data Analysis (unplublished).
-		
-website: 	https://edwards.sdsu.edu/FOCUS2
+## Installation
+### Dependencies
+- [Python 3.6](http://www.python.org/download)
+- [Setuptools 36.0.1](https://setuptools.readthedocs.io/en/latest/)
+- [Jellyfish 2.2.6](https://github.com/gmarcais/Jellyfish/releases/tag/v2.2.6). if using macOS, use [bioconda](https://anaconda.org/bioconda/jellyfish)
+- [Numpy 1.12.1](https://github.com/numpy/numpy)
+- [SciPy 0.19.0](https://github.com/scipy/scipy)
+- [Pysam](https://github.com/pysam-developers/pysam)
+- unzip/curl
+
+### pip3 (WIP
+	pip3 install metagenomics-focus2
+
+### Bioconda (WIP)
+You can now easily install FOCUS2 using [conda](https://conda.io) via the
+[Bioconda](https://bioconda.github.io/) channel. It is as easy as:
+
+    # bioconda should handle all the dependencies
+    conda create -n focus2 -c bioconda focus2
+	source activate focus2
+
+This will create a conda environment called `focus2` (as specified by the
+`-n` argument), and install FOCUS2 along with all its dependencies. The second
+line activates the newly created `focus2` conda environment.
+
+### Git
+
+	# clone focus2
+	git clone git@github.com:metageni/FOCUS2.git
+
+	# install focus2
+	cd FOCUS2 && python setup.py install
+
+## Usage
+
+	focus2 [-h] [-v] -q QUERY -o OUTPUT_DIRECTORY [-p OUTPUT_PREFIX]
+                 [-b ALTERNATE_DIRECTORY] [-t THREADS] [-l LOG]
+
+    FOCUS2: Agile and sensitive classification of metagenomics data using a
+    reduced database
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -v, --version         show program's version number and exit
+      -q QUERY, --query QUERY
+                            Path to directory with FAST(A/Q) files
+      -o OUTPUT_DIRECTORY, --output_directory OUTPUT_DIRECTORY
+                            Path to output files
+      -p OUTPUT_PREFIX, --output_prefix OUTPUT_PREFIX
+                            Output prefix (Default: output)
+      -b ALTERNATE_DIRECTORY, --alternate_directory ALTERNATE_DIRECTORY
+                            Alternate directory for your databases
+      -t THREADS, --threads THREADS
+                            Number Threads used during alignment (Default: 4)
+      -l LOG, --log LOG     Path to log file (Default: STDOUT).
+
+    example > focus2 -q INPUT_DIR -o OUTPUT
 
 
-Program
---------
-focus2__downloadDB.py: Downloads the FOCUS2 database
+## Output (WIP)
+FOCUS2 generates a tabular output per taxonomic level (`Kingdom`, `Phylum`, `Class`, `Order`, `Family`, `Genus`, `Species`, and `Strain`) and one with all levels which can be used as [STAMP](http://kiwi.cs.dal.ca/Software/STAMP)'s input for statistical analysis.
 
-(1) USAGE
-python focus2__downloadDB.py
+## Citing (WIP)
+FOCUS2 was written by Genivaldo G. Z. Silva. Feel free to [contact me](mailto:genivaldo.gueiros@gmail.com)
 
-Program
---------
-focus2.py: FOCUS2 main program
+If you use FOCUS2, please cite it:
 
-(1) USAGE
------
-
-Options:
-
-	-h  none
-		print help
-		
-	-q string
-		folder with multiple FASTA/FASTQ files
-		
-	-dir string
-		output directory
-		
-	-o string
-		project name (default 'my_project')
-		
-	-mi float
-		minimum identity (default 60 %)
-		
-	-ml int
-		minimum alignment (default 45 nucleotides)
-		
-	-k int
-		k-mer frequency used on FOCUS (default: 7) (6/7)
-		
-	-n int
-		normalize counts minimum alignment (0:False/1:True)(default: 0)
-		
-	-t int
-		number of threads (default 1)
-		
-	-e float
-		e-value (default 0.00001)
-		
-	-a string
-		aligner (blastn/hsblastn) (default: hsblastn)
-		
-	-s int
-		split profiling in different levels (0:False/1:True)(default: 1)
-		
-	-bootstrap int
-		resamples the data to have more confidence in the results (0:False/1:True)(default: 0)
-		
-	-ns int
-		number of resampling per sample (default: 10)
-		
-	-b float
-		% of sequences to resample (default: 80.0)
-		
-	example> python focus2.py -q input/ -dir output/
-	 
-(2) OUTPUT
-FOCUS2 output will be add the folder selected in -dir
-
-Program
---------
-(1) FOCUS2(R)
-
-Options:
-
-	-h none
-		print help
-		
-	-q string
-		folder with multiple FASTA/FASTQ files
-		
-	-b file
-		binning file for '-q' from FOCUS2
-		
-	-dir string
-		output directory
-		
-	-mi float
-		minimum identity (default 60 %)
-		
-	-ml int
-		minimum alignment (default 45 nucleotides)
-		
-	-e float
-		e-value (default 0.00001)
-		
-	-t int
-		number of threads (default 1)
-		
-	-o string
-		project name (default 'my_project')
-	
-	example> python focus2r.py -q FASTA/FASTQ -b focus2_binning -dir output/
-
-(2) OUTPUT
-FOCUS2R output will be add the folder selected in -dir
-
-(3) OBSERVATION
-- FOCUS2(R) only uses hs-blastn as aligner
-
-DEPENDENCIES
-------------
-- Python >= 2.6.X < 3.Y: http://www.python.org/download
-- Jellyfish: http://www.cbcb.umd.edu/software/jellyfish
-- Numpy: http://sourceforge.net/projects/numpy/files/NumPy
-- SciPy: http://sourceforge.net/projects/scipy
-
-One of the below aligners:
-- BLAST: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST
-- HS-BLASTN: https://github.com/chenying2016/queries
-
-COPYRIGHT AND LICENSE
----------------------
-Copyright (C) 2015-2016  Genivaldo Gueiros Z. Silva
-
-This program is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with
-this program.  If not, see <http://www.gnu.org/licenses/>.
+    Silva, G. G. Z.,
