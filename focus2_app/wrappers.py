@@ -6,6 +6,21 @@ import os
 from shutil import which
 
 
+class mock_focus_args:
+    def __init__(self, query_dir, number_threads, output_directory, kmer_size, log):
+        # set
+        self.list_output = True
+        self.query = query_dir
+        self.output_directory = output_directory
+        self.kmer_size = kmer_size
+        self.threads = number_threads
+        self.log = log
+
+        # default
+        self.alternate_directory = ""
+        self.output_prefix = "output"
+
+
 def is_wanted_file(queries):
     """Remove files from query files that not have extension FASTA/FASTA/FNA.
 

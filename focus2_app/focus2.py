@@ -10,8 +10,10 @@ from collections import defaultdict
 from shutil import which
 
 from focus2_app import version
-from wrappers import is_wanted_file, bwa_alignment, samtools_view, samtools_bam2fq
+from wrappers import is_wanted_file, bwa_alignment, samtools_view, samtools_bam2fq, mock_focus_args
 from do_alignment import parse_alignments
+
+import focus_app.focus as focus
 
 LOGGER_FORMAT = '[%(asctime)s - %(levelname)s] %(message)s'
 
@@ -55,7 +57,7 @@ def main():
 
     logger = logging.getLogger(__name__)
 
-    logger.info("FOCUS2: Agile and sensitive classification of metagenomics data using a reduced database.")
+    logger.info("FOCUS2: Agile and sensitive classification of metagenomics data using a reduced database.\n")
 
     # check if bwa was installed
     if not which("bwa"):
@@ -83,6 +85,14 @@ def main():
         logger.critical("work_directory: {} does not exist".format(work_directory))
 
     else:
+        logger.info("Running FOCUS to quickly predict taxa in your query file(s)")
+
+        kmer_size = "6"
+        mock_args = mock_focus_args(query, threads, output_directory, kmer_size, args.log)
+
+        focus_result = focus.main(mock_args)
+        logger.info("Done with FOCUS\n")
+
         logger.info("Running FOCUS2")
 
         abundance_counts = defaultdict(dict)
